@@ -1,20 +1,19 @@
-import nimble
+import nimblephysics as nimble
 import joblib
 import pickle
 import trimesh
 import pyvista
 import os
-
-
-
-custom_opensim: nimble.biomechanics.OpenSimFile = nimble.biomechanics.OpenSimParser.parseOsim("./osim/Rajagopal2015_passiveCal_hipAbdMoved_noArms.osim")
+import tqdm
+cpath = os.getcwd()
+custom_opensim: nimble.biomechanics.OpenSimFile = nimble.biomechanics.OpenSimParser.parseOsim(os.path.join(cpath,"osim/Rajagopal2015_passiveCal_hipAbdMoved_noArms.osim"))
 skeleton: nimble.dynamics.Skeleton = custom_opensim.skeleton
 
-test_list=os.listdir("./data")
+test_list=os.listdir("./data/nimble_test")
 for filename in test_list:
-    data = joblib.load(open(filename, 'rb'))
-    base_name=os.path.splitext(filename)[0]
-    dirs=os.path.join('figure',basename)
+    data = joblib.load(open(os.path.join("./data/nimble_test",filename), 'rb'))
+    basename=os.path.splitext(filename)[0]
+    dirs=os.path.join('./data/nimble_test/figure',basename)
     if not os.path.exists(dirs):
         os.makedirs(dirs)
         
@@ -42,7 +41,8 @@ for filename in test_list:
             return tmesh
         objects = []
 
-        for k,b in enumerate(skeleton.getBodyNodes()):
+        for k in range(skeleton.getNumBodyNodes()):
+            b=  skeleton.getBodyNode(k)
             n = b.getNumShapeNodes()
             for i in range(n):
                 s = b.getShapeNode(i)
@@ -65,6 +65,7 @@ for filename in test_list:
         motion_picture=scene.save_image(visible=False)   
         from PIL import Image
         rendered = Image.open(trimesh.util.wrap_as_stream(motion_picture))
+        rendered.save(os.path.join(motion_dirs,str(frame)+".png"))
 
 
 

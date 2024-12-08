@@ -161,3 +161,4 @@ dependencies:
       - torchgeometry==0.1.2
       - trimesh==4.1.4
       - wandb==0.12.21
+      - nimblephysics==0.10.52.1
