@@ -34,7 +34,7 @@ The file structure should be
  |- vtp_to_ply.py
 
 - models
- |- containing SMPL models from [https://smpl-x.is.tue.mpg.de/](https://smpl.is.tue.mpg.de)
+ |- containing SMPL models from https://smpl.is.tue.mpg.de
  |- containing Rajagopal2015 model without arm from https://addbiomechanics.org/download_data.html
 - convert.py
 - adb_motion_visualize.py
