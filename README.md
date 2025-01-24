@@ -1,4 +1,4 @@
-# ImDy: Human Inverse Dynamics from Imitated Observations
+# [ImDy: Human Inverse Dynamics from Imitated Observations](https://foruck.github.io/ImDy/) (ICLR 2025) 
 
 The code release is in progress.
 
