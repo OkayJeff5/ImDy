@@ -50,7 +50,7 @@ The torques stored are acquired by summing two consecutive torques in the simula
 
 ## Checkpoint
 
-You could download the checkpoint [here](https://drive.google.com/drive/folders/1kDr_UpdpE19efO99sp-oCInreX7o1CqY?usp=sharing). 
+You could download the checkpoints [here](https://drive.google.com/drive/folders/1kDr_UpdpE19efO99sp-oCInreX7o1CqY?usp=sharing). 
 
 
 ## Train
