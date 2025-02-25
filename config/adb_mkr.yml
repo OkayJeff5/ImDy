@@ -1,0 +1,96 @@
+STAGE: TRAIN
+seed: 42
+DEVICE: 1
+LOGGING_LEVEL: INFO
+PAST_KF: 2
+FUTURE_KF: 2
+rot_rep: quat
+USE_NORM: true
+IGNORE_WARNINGS: true
+eval_interval: 10
+save_interval: 10
+log_interval: 1
+
+OPTIMIZER:
+  TYPE: AdamW
+  momentum: 0.9
+  weight_decay: 1e-7
+  EPS: 1e-8
+  LR:
+    base: 
+      1e-3
+    warmup:
+      epoch : 2
+      lr_init : 
+        5e-6
+    scheduler: 
+      step:
+        step_size : 200
+        gamma: 0.5
+
+TRAIN:
+  DEBUG: false
+  SHOW_ITER: true
+  LOG_FREQ: 100
+  BATCH_SIZE: 24
+  PREFETCH: 2
+  NUM_WORKERS: 4
+  max_norm: 5.0
+  EPOCHS: 150
+  loss_after_denorm: false
+
+TEST:
+  SHOW_ITER: true
+  LOG_FREQ: 500
+  BATCH_SIZE: 24
+  PREFETCH: 2
+  NUM_WORKERS: 4
+  
+MODEL:
+  adb_tor: true
+  NAME: mkrIDFD
+
+  transformer:
+    inkeys_id: ['mkr', 'mvel']
+    outkeys_id: ['torque', 'grf', 'contact']
+    inkeys_fd: ['mkr_pre', 'grf_pre', 'torque']
+    outkeys_fd: ['mkr_post']
+    acti: 'relu'
+    norm: 'layer'
+    num_layers: 3
+    dim: 64
+    num_head: 4
+    intermediate: false
+    cls: false
+
+LOSS:
+  weight_dict: 
+    L1_mkr_post: 1.
+    L_torque_l2: 1.
+    L_grf_l2: 1.
+    L_contact: 1.
+    L_temp: 0.01
+
+METRIC:
+  req: ['L1_torque', 'L2_grf']
+
+DATASET:
+  TRAIN:
+    MODE: adb
+    norm_name: adb
+    treadmill: true
+    adb_tor: true
+    dpath: # your data path to ADB_train #
+    dkeys: ['torque', 'grf', 'mkr', 'weight']
+    nkeys: ['torque', 'grf']
+    out_dkeys: ['mkr', 'mvel', 'torque', 'grf', 'mkr_pre', 'mkr_post', 'grf_pre', 'weight']
+    # out_dkeys: ['torque', 'grf', 'grf_pre', 'weight']
+    mkr_sample: random
+  TEST:
+    MODE: adb
+    treadmill: true
+    adb_tor: true
+    dpath: # your data path to ADB_test #    
+    dkeys: ['torque', 'grf', 'mkr', 'weight']
+    out_dkeys: ['mkr', 'mvel', 'torque', 'grf', 'weight']
+    mkr_sample: full
