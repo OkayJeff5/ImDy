@@ -43,9 +43,28 @@ The file structure should be
 Run ``python convert.py`` to convert the raw data into a different format with per-sample pickle files including axis-angle format SMPL parameters, joints, and markers. 
 The torques stored are acquired by summing two consecutive torques in the simulation. 
 
-Run ``adb_motion_visualize.py`` to visualize the motion from Addbiomechanics Dataset frame by frame.
+Run ``python main.py config_path=config/IDFD_mkr.yml USE_WANDB=True Timestamp=False`` to pre-train the ImDy model. In ``IDFD_mkr.yml``, you should modify the data path.
+```
+    joint_tor: true
+    dpath: # your data path to imdy_train #
+    cls_aug: false
+......
+
+    joint_tor: true
+    dpath: # your data path to imdy_test #
+    cls_aug: false
+```
+
+Run ``python main_freeze.py config_path=config/adb_mkr.yml USE_WANDB=True Timestamp=False`` to train the Addbiomechanics model. 
+
+![imdys](./static/images/imdys.PNG)
+
+Run ``python adb_motion_visualize.py`` to visualize the motion from Addbiomechanics Dataset frame by frame.
 In line 64, you could change the angles of camera to better visualize the motion.
 ```
 scene.set_camera(angles=(-pi/8,pi/2+pi/4,0),distance=2.5) 
 ```
-![nimble example](./data/nimble_test/figure/walking/0.png)
+![nimble example](./data/nimble_test/figure/walking/walking.gif)
+
+
+
