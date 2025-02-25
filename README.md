@@ -8,7 +8,7 @@ Create a conda environment from `environment.yml`: `conda env create -f environm
 
 ## Data Acquisition
 
-For data access, please get in touch with xinpengliu0907@gmail.com. 
+1. For data access, please get in touch with xinpengliu0907@gmail.com. 
 
 The file structure should be 
 
@@ -40,10 +40,12 @@ The file structure should be
 - adb_motion_visualize.py
 ```
 
-Run ``python convert.py`` to convert the raw data into a different format with per-sample pickle files including axis-angle format SMPL parameters, joints, and markers. 
+2. Run ``python convert.py`` to convert the raw data into a different format with per-sample pickle files including axis-angle format SMPL parameters, joints, and markers. 
 The torques stored are acquired by summing two consecutive torques in the simulation. 
 
-Run ``python main.py config_path=config/IDFD_mkr.yml USE_WANDB=True Timestamp=False`` to pre-train the ImDy model. In ``IDFD_mkr.yml``, you should modify the data path.
+## Train
+
+1. Run ``python main.py config_path=config/IDFD_mkr.yml USE_WANDB=True Timestamp=False`` to pre-train the ImDy model. In ``IDFD_mkr.yml``, you should modify the data path.
 ```
     joint_tor: true
     dpath: # your data path to imdy_train #
@@ -55,8 +57,9 @@ Run ``python main.py config_path=config/IDFD_mkr.yml USE_WANDB=True Timestamp=Fa
     cls_aug: false
 ```
 
-Run ``python main_freeze.py config_path=config/adb_mkr.yml USE_WANDB=True Timestamp=False`` to train the Addbiomechanics model. 
+2. Run ``python main_freeze.py config_path=config/adb_mkr.yml USE_WANDB=True Timestamp=False`` to train the Addbiomechanics model. 
 
+## Visualization
 ![imdys](./static/images/imdys.PNG)
 
 Run ``python adb_motion_visualize.py`` to visualize the motion from Addbiomechanics Dataset frame by frame.
