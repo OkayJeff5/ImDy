@@ -38,10 +38,20 @@ The file structure should be
  |- containing Rajagopal2015 model without arm from https://addbiomechanics.org/download_data.html
 - convert.py
 - adb_motion_visualize.py
+- main.py
+- main_freeze.py
+- dataset.py
+- engine.py
 ```
 
 2. Run ``python convert.py`` to convert the raw data into a different format with per-sample pickle files including axis-angle format SMPL parameters, joints, and markers. 
 The torques stored are acquired by summing two consecutive torques in the simulation. 
+
+
+## Checkpoint
+
+You could download the checkpoint [here](https://drive.google.com/drive/folders/1kDr_UpdpE19efO99sp-oCInreX7o1CqY?usp=sharing). 
+
 
 ## Train
 
