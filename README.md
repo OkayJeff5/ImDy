@@ -44,7 +44,7 @@ The file structure should be
 - engine.py
 ```
 
-2. Run ``python convert.py`` to convert the raw data into a different format with per-sample pickle files including axis-angle format SMPL parameters, joints, and markers. 
+2. Run ``python convert.py; python generate_cand.py`` to convert the raw data into a different format with per-sample pickle files including axis-angle format SMPL parameters, joints, and markers. 
 The torques stored are acquired by summing two consecutive torques in the simulation. 
 
 
