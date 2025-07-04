@@ -8,7 +8,7 @@ Create a conda environment from `environment.yml`: `conda env create -f environm
 
 ## Data Acquisition
 
-1. For data access, please get in touch with xinpengliu0907@gmail.com. 
+1. For data access, please visit [our Hugging Face repository](https://huggingface.co/datasets/XinpengLiu/ImDy).
 
 The file structure should be 
 
